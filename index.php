@@ -20,7 +20,7 @@
     <header>
         <div class="overlay"></div>
           <nav>
-          <h2> SHOP </h2>
+          <h2> RDSTAMPS </h2>
             <ul>
               <li> <a href="index.php">HOME</a></li>
               <li> <a href="#">About</a></li>

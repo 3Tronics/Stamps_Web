@@ -14,15 +14,15 @@ let products = [
     inCart: 0
   },
   {
-    name: "stamp",
-    tag: "3fx0",
-    price: 4.44,
+    name: "KingGeorge3",
+    tag: "0020.KingGeorge3.$0.66",
+    price: 0.66,
     inCart: 0
   },
   {
-    name: "stamp",
-    tag: "4fx0",
-    price: 8.88,
+    name: "KingGeorge3",
+    tag: "0020.KingGeorge3.$0.33",
+    price: 0.33,
     inCart: 0
   },
   {

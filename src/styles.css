@@ -13,14 +13,7 @@
   font-size: 16px;
   cursor: pointer;
 }
-.btn2 {
-  background-color: white;
-  border: none;
-  color: darkblue;
-  padding: 10px 10px;
-  font-size: 16px;
-  cursor: pointer;
-}
+
 
 header {
   background-image: url("/src/images/header.jpg");
@@ -73,12 +66,6 @@ li a {
   text-decoration: none;
 }
 
-.cart ion-icon {
-  vertical-align: bottom;
-  padding-right: 5px;
-  font-size: 20px;
-  color: blue;
-}
 
 .cart a {
   background-color: darkblue;
@@ -105,11 +92,11 @@ li a {
 .add-cart {
   position: absolute;
   bottom: 0%;
-  top: 60%;
-  width: 100%;
-  height: 20%;
+  top: 50%;
+  height: 18%;
+  width:100%;
   background-color: #555;
-  color: blue;
+  color: white;
   font-size: 100%;
   border: none;
   cursor: pointer;
@@ -130,6 +117,15 @@ li a {
 
 /*--------------- CART PAGE ---------------*/
 
+.btn2 {
+  background-color: white;
+  border: none;
+  color: darkblue;
+  padding: 10px 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
 .products-container {
   max-width: 650px;
   justify-content: space-around;
@@ -137,13 +133,6 @@ li a {
   margin-top: 50px;
 }
 
-.products-container ion-icon {
-  font-size: 30px;
-  color: blue;
-  margin-left: 10px;
-  margin-right: 10px;
-  cursor: pointer;
-}
 
 .products-header {
   width: 100%;
