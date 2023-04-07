@@ -1,9 +1,9 @@
-name: Deploy to Web Hosting via FTP
+name: Deploy release to Web Hosting via FTP
 
 on:
   push:
     branches:
-      - xdev*
+      - release
 
 jobs:
   web-deploy:
@@ -21,8 +21,8 @@ jobs:
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
         protocol: ftp
-        local-dir: ./src/
-        server-dir: ./dev/${{ github.ref_name }}/
+        local-dir: ./
+        server-dir: ./stamps.3tronics.com/
         exclude: |
           **/.git*
 
