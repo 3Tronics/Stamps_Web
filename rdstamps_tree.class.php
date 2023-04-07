@@ -2,79 +2,31 @@
 
 /*
 
-This is one of the free scripts from www.dhtmlgoodies.com
+This is one of the free scripts from www.rdstamps.com
 You are free to use this script as long as this copyright message is kept intact
 
-(c) Alf Magne Kalleland, http://www.dhtmlgoodies.com - 2005
+(c) Alf Magne Kalleland, http://www.rdstamps.com - 2005
 
 */
 
-class dhtmlgoodies_tree{
+class rdstamps_tree{
 
 	
 	var $elementArray = array();
-	var $nameOfCookie = "dhtmlgoodies_expanded"; // Name of the cookie where the expanded nodes are stored.
-
-	function dhtmlgoodies_tree()
+	var $current_level_Cookie = "rdstamps_expanded"; // Name of the cookie where the expanded nodes are stored.
+	var $current_folder_Cookie = "rdstamps_current_folder";
+	function rdstamps_tree()
 	{
 
 
 	}
 
 
-
-	function writeCSS()
-	{
-		?>
-		<style type="text/css">
-		/*
-
-		This is one of the free scripts from www.dhtmlgoodies.com
-		You are free to use this script as long as this copyright message is kept intact
-
-		(c) Alf Magne Kalleland, http://www.dhtmlgoodies.com - 2005
-
-		*/
-		#dhtmlgoodies_tree li{
-			list-style-type:none;
-			font-family: arial;
-			font-size:14px;
-
-		}
-		#dhtmlgoodies_topNodes{
-			margin-left:0px;
-			padding-left:0px;
-		}
-		#dhtmlgoodies_topNodes ul{
-			margin-left:20px;
-			padding-left:0px;
-			display:none;
-		}
-		#dhtmlgoodies_tree .tree_link{
-			line-height:13px;
-			padding-left:2px;
-
-		}
-		#dhtmlgoodies_tree img{
-			padding-top:2px;
-		}
-		#dhtmlgoodies_tree a{
-			color: #000000;
-			text-decoration:none;
-		}
-		.activeNodeLink{
-			background-color: #316AC5;
-			color: #FFFFFF;
-			font-weight:bold;
-		}
-		</style>
-		<?php
-	}
 
 	function writeJavascript()
 	{
 		?>
-		<script type="text/javascript">
+		<script>
 /************************************************************************************************************
 Folder tree - PHP
 Copyright (C) 2005 - 2009  DTHMLGoodies.com, Alf Magne Kalleland
@@ -101,14 +53,19 @@ Owner of DHTMLgoodies.com
 
 ************************************************************************************************************/
 		var message = '';
-		var plusNode = 'images/dhtmlgoodies_plus.gif';
-		var minusNode = 'images/dhtmlgoodies_minus.gif';
+		var plusNode = 'src/icons/rdstamps_plus.gif';
+		var minusNode = 'src/icons/rdstamps_minus.gif';
+		var openFolder = 'src/icons/folder_open.gif';
+		var closedFolder = 'src/icons/folder_closed.gif';
 
-		var nameOfCookie = '<?php echo $this->nameOfCookie; ?>';
+		var current_level_Cookie = '<?php echo $this->current_level_Cookie; ?>';
+		var current_folder_Cookie = '<?php echo $this->current_folder_Cookie; ?>';
+	
 		<?php
 		$cookieValue = "";
-		if(isset($_COOKIE[$this->nameOfCookie]))$cookieValue = $_COOKIE[$this->nameOfCookie];
+		if(isset($_COOKIE[$this->current_level_Cookie]))$cookieValue = $_COOKIE[$this->current_level_Cookie];
 		echo "var initExpandedNodes =\"".$cookieValue."\";\n";
+
 		?>
 		/*
 		These cookie functions are downloaded from
@@ -129,13 +86,18 @@ Owner of DHTMLgoodies.com
 			var today = new Date();
 			var expires_date = new Date( today.getTime() + (expires) );
 		    var cookieString = name + "=" +escape(value) +
-		       ( (expires)  ? ";expires=" + expires_date.toGMTString() : "") +
-		       ( (path)     ? ";path="    + path     : "") +
-		       ( (domain)   ? ";domain="  + domain   : "") +
-		       ( (samesite) ? ";samesite=lax"        : "") +
-		       ( (secure)   ? ";secure"              : ";secure");
+			   ( (expires)  ? ";expires=" + expires_date.toGMTString() : "") +
+			   ( (path)     ? ";path="    + path     : "") +
+			   ( (domain)   ? ";domain="  + domain   : "") +
+		       ( (samesite) ? ";samesite=lax"        : ";samesite=lax") +
+		       ( (secure)   ? ";secure"              : "");
 		    document.cookie = cookieString;
 		}
+
+		document.addEventListener(current_folder_Cookie, ({detail}) => {
+    		const {name, value} = detail
+    		console.log(`${name} was set to ${value}`)
+		})
 		/*
 		End downloaded cookie functions
 		*/
@@ -149,7 +111,7 @@ Owner of DHTMLgoodies.com
 
 		function expandAll()
 		{
-			var treeObj = document.getElementById('dhtmlgoodies_tree');
+			var treeObj = document.getElementById('rdstamps_tree');
 			var images = treeObj.getElementsByTagName('IMG');
 			for(var no=0;no<images.length;no++){
 				if(images[no].className=='tree_plusminus' && images[no].src.indexOf(plusNode)>=0)expandNode(false,images[no]);
@@ -159,7 +121,7 @@ Owner of DHTMLgoodies.com
 		}
 		function collapseAll()
 		{
-			var treeObj = document.getElementById('dhtmlgoodies_tree');
+			var treeObj = document.getElementById('rdstamps_tree');
 			var images = treeObj.getElementsByTagName('IMG');
 			for(var no=0;no<images.length;no++){
 				if(images[no].className=='tree_plusminus' && images[no].src.indexOf(minusNode)>=0)expandNode(false,images[no]);
@@ -173,27 +135,48 @@ Owner of DHTMLgoodies.com
 
 			if(initExpandedNodes.length==0)initExpandedNodes=",";
 			if(!inputNode)inputNode = this;
-			if(inputNode.tagName.toLowerCase()!='img')inputNode = inputNode.parentNode.getElementsByTagName('IMG')[0];
+			if(inputNode.tagName.toLowerCase()!='img') inputNode = inputNode.parentNode.getElementsByTagName('IMG')[0];
+			
 
 			var inputId = inputNode.id.replace(/[^\d]/g,'');
-
 			var parentUl = inputNode.parentNode;
 			var subUl = parentUl.getElementsByTagName('UL');
+			var selecteddir="src/stamps_for_sale/CAN/1950-1959"
+			
+           
+			if(subUl.length==0){	
+				var lis = document.getElementsByTagName('li');
+				if(e){
+					selecteddir = e.currentTarget.id;					
+				}
 
-			if(subUl.length==0)return;
-			if(subUl[0].style.display=='' || subUl[0].style.display=='none'){
+
+				//Reload container
+			
+    			$('#stps').load('index.php #stps > *');
+					
+			}
+			else{
+
+				if(subUl[0].style.display=='' || subUl[0].style.display=='none'){
 				subUl[0].style.display = 'block';
+
 				inputNode.src = minusNode;
 				initExpandedNodes = initExpandedNodes.replace(',' + inputId+',',',');
-				initExpandedNodes = initExpandedNodes + inputId + ',';
-
-			}else{
+				initExpandedNodes = initExpandedNodes + inputId + ',';	
+				inputNode.nextSibling.src=openFolder;
+   
+				}else{
 				subUl[0].style.display = '';
 				inputNode.src = plusNode;
 				initExpandedNodes = initExpandedNodes.replace(','+inputId+',',',');
+				inputNode.nextSibling.src = closedFolder;
+				}
 			}
-			Set_Cookie(nameOfCookie,initExpandedNodes,60);
-
+			
+			
+			Set_Cookie(current_level_Cookie,initExpandedNodes,60);
+			Set_Cookie(current_folder_Cookie,selecteddir,60);
 
 
 		}
@@ -201,7 +184,7 @@ Owner of DHTMLgoodies.com
 		function initTree()
 		{
 			// Assigning mouse events
-			var parentNode = document.getElementById('dhtmlgoodies_tree');
+			var parentNode = document.getElementById('rdstamps_tree');
 			var lis = parentNode.getElementsByTagName('LI'); // Get reference to all the images in the tree
 			for(var no=0;no<lis.length;no++){
 				var subNodes = lis[no].getElementsByTagName('UL');
@@ -247,14 +230,14 @@ Owner of DHTMLgoodies.com
 	This function adds elements to the array
 	*/
 
-	function addToArray($id,$name,$parentID,$url="",$target="",$icon="images/folder_open.gif", $onclick = ''){
+	function addToArray($id,$name,$parentID,$folder="",$target="",$icon="src/icons/folder_closed.gif", $onclick = ''){
 
 
 		if(empty($parentID))$parentID=0;
 		$this->elementArray[$parentID][] = array(
 			'id' => $id,
 			'title' => $name,
-			'url' => $url,
+			'folder' => $folder,
 			'target' => $target,
 			'icon' => $icon,
 			'onclick' => $onclick
@@ -271,7 +254,7 @@ Owner of DHTMLgoodies.com
 			$element['parentId'] = 0;
 		}
 
-		$element['url'] = isset($element['url']) ? $element['url'] : 'javascript:return false';
+		$element['folder'] = isset($element['folder']) ? $element['folder'] : 'javascript:return false';
 		$element['target'] = isset($element['target']) ? $element['target'] : '';
 		$element['icon'] = isset($element['icon']) ? $element['icon'] : 'images/folder_open.gif';
 		$element['onclick'] = isset($element['onclick']) ? $element['onclick'] : '';
@@ -280,7 +263,7 @@ Owner of DHTMLgoodies.com
 		$this->elementArray[$element['parentId']][] = array(
 			'id' => $element['id'],
 			'title' => $element['title'],
-			'url' => $element['url'],
+			'folder' => $element['folder'],
 			'target' => $element['target'],
 			'icon' => $element['icon'],
 			'onclick' => $element['onclick']
@@ -291,21 +274,28 @@ Owner of DHTMLgoodies.com
 	}
 
 	function drawSubNode($parentID){
+		$folder='src/stamps_for_sale/*';
 		if(isset($this->elementArray[$parentID])){
 			echo "<ul>";
 			for($no=0;$no<count($this->elementArray[$parentID]);$no++){
-				$urlAdd = " href=\"#\"";
-				if($this->elementArray[$parentID][$no]['url']){
-					$urlAdd = " href=\"".$this->elementArray[$parentID][$no]['url']."\"";
-					if($this->elementArray[$parentID][$no]['target'])$urlAdd.=" target=\"".$this->elementArray[$parentID][$no]['target']."\"";
+				$folderAdd = " id=\"#\"";
+				if($this->elementArray[$parentID][$no]['folder']){
+					$folderAdd = " id=\"".$this->elementArray[$parentID][$no]['folder']."\"";
+					if($this->elementArray[$parentID][$no]['target'])$folderAdd.=" target=\"".$this->elementArray[$parentID][$no]['target']."\"";
 				}
 				$onclick = "";
 				if($this->elementArray[$parentID][$no]['onclick']){
 					$onclick = " onmouseup=\"".$this->elementArray[$parentID][$no]['onclick'].";return false\"";
 				}
 				echo "<li class=\"tree_node\">";
-				echo "<img class=\"tree_plusminus\" id=\"plusMinus".$this->elementArray[$parentID][$no]['id']."\" src=\"images/dhtmlgoodies_plus.gif\"><img src=\"".$this->elementArray[$parentID][$no]['icon']."\">";
-				echo "<a class=\"tree_link\"$urlAdd$onclick>".$this->elementArray[$parentID][$no]['title']."</a>";
+				$as=$this->elementArray[$parentID][$no]['icon'];
+				if(strlen($as)>0){
+				  echo "<img class=\"tree_plusminus\" alt=\"icon\" id=\"plusMinus".$this->elementArray[$parentID][$no]['id']."\" src=\"src/icons/rdstamps_plus.gif\"><img src=\"".$this->elementArray[$parentID][$no]['icon']."\">";
+				}
+				else{
+					echo "<img class=\"tree_plusminus\" alt=\"icon\" id=\"plusMinus".$this->elementArray[$parentID][$no]['id']."\" src=\"src/icons/rdstamps_plus.gif\">";
+				}
+				echo "<a class=\"tree_link\"$folderAdd$onclick>".$this->elementArray[$parentID][$no]['title']."</a>";			
 				$this->drawSubNode($this->elementArray[$parentID][$no]['id']);
 				echo "</li>";
 			}
@@ -314,22 +304,25 @@ Owner of DHTMLgoodies.com
 	}
 
 	function drawTree(){
-		echo "<div id=\"dhtmlgoodies_tree\">";
-		echo "<ul id=\"dhtmlgoodies_topNodes\">";
+		echo "<div id=\"rdstamps_tree\">";
+		echo "<ul id=\"rdstamps_topNodes\">";
 		for($no=0;$no<count($this->elementArray[0]);$no++){
-			$urlAdd = "";
-			if($this->elementArray[0][$no]['url']){
-				$urlAdd = " href=\"".$this->elementArray[0][$no]['url']."\"";
-				if($this->elementArray[0][$no]['target'])$urlAdd.=" target=\"".$this->elementArray[0][$no]['target']."\"";
+			$folderAdd = "";
+			if($this->elementArray[0][$no]['folder']){
+				$folderAdd = " id=\"".$this->elementArray[0][$no]['folder']."\"";
+				if($this->elementArray[0][$no]['target'])$folderAdd.=" target=\"".$this->elementArray[0][$no]['target']."\"";
 			}
 			$onclick = "";
 			if($this->elementArray[0][$no]['onclick']){
 				$onclick = " onmouseup=\"".$this->elementArray[0][$no]['onclick'].";return false\"";
 			}
 			echo "<li class=\"tree_node\" id=\"node_".$this->elementArray[0][$no]['id']."\">";
-			echo "<img id=\"plusMinus".$this->elementArray[0][$no]['id']."\" class=\"tree_plusminus\" src=\"images/dhtmlgoodies_plus.gif\">";
-			echo "<img src=\"".$this->elementArray[0][$no]['icon']."\">";
-			echo "<a class=\"tree_link\"$urlAdd$onclick>".$this->elementArray[0][$no]['title']."</a>";
+			echo "<img id=\"plusMinus".$this->elementArray[0][$no]['id']."\" alt=\"icon\" class=\"tree_plusminus\" src=\"src/icons/rdstamps_plus.gif\">";
+			$ms=$this->elementArray[0][$no]['icon'];
+			if(strlen($ms)>0){
+				echo "<img alt=\"icon\" src=\"".$this->elementArray[0][$no]['icon']."\">";
+			}
+			echo "<a class=\"tree_link\"$folderAdd$onclick>".$this->elementArray[0][$no]['title']."</a>";
 			$this->drawSubNode($this->elementArray[0][$no]['id']);
 			echo "</li>";
 		}

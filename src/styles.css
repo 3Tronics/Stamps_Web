@@ -66,6 +66,12 @@ li a {
   text-decoration: none;
 }
 
+.cart form {
+  background-color: darkblue;
+  color: #fff;
+  cursor: pointer;
+  text-decoration: none;
+}
 
 .cart a {
   background-color: darkblue;
