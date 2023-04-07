@@ -1,4 +1,4 @@
-name: Deploy to Web Hosting via FTP
+name: Deploy feature to Web Hosting via FTP
 
 on:
   push:
