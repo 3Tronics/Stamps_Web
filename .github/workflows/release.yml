@@ -1,17 +1,9 @@
-<<<<<<< HEAD
-name: Deploy main to Web Hosting via FTP
-=======
-name: Deploy dev to Web Hosting via FTP
->>>>>>> origin/dev2
+name: Deploy release to Web Hosting via FTP
 
 on:
   push:
     branches:
-<<<<<<< HEAD
       - release
-=======
-      - main
->>>>>>> origin/dev2
 
 jobs:
   web-deploy:
@@ -21,6 +13,7 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
+
     - name: FTP Deploy
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
@@ -28,13 +21,8 @@ jobs:
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
         protocol: ftp
-<<<<<<< HEAD
-        local-dir: ./src/
-        server-dir: ./www/
-=======
         local-dir: ./
         server-dir: ./stamps.3tronics.com/
->>>>>>> origin/dev2
         exclude: |
           **/.git*
 
