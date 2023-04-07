@@ -1,17 +1,9 @@
-<<<<<<< HEAD
 name: Deploy main to Web Hosting via FTP
-=======
-name: Deploy dev to Web Hosting via FTP
->>>>>>> origin/dev2
 
 on:
   push:
     branches:
-<<<<<<< HEAD
-      - release
-=======
       - main
->>>>>>> origin/dev2
 
 jobs:
   web-deploy:
@@ -28,13 +20,8 @@ jobs:
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
         protocol: ftp
-<<<<<<< HEAD
-        local-dir: ./src/
-        server-dir: ./www/
-=======
         local-dir: ./
         server-dir: ./stamps.3tronics.com/
->>>>>>> origin/dev2
         exclude: |
           **/.git*
 
