@@ -21,7 +21,7 @@
   <link rel="stylesheet" href="/src/modal.css">
   <link rel="stylesheet" href="/src/style.min_formatted.css" />
 
-   <title> This is the Home page V01.50</title>
+   <title> This is the Home page V01.51</title>
 
 
 <style>
