@@ -1,9 +1,9 @@
-name: Deploy to Web Hosting via FTP
+name: Deploy Workflow to Web Hosting via FTP
 
 on:
   push:
     branches:
-      - dev*
+      - WorkFlow*
 
 jobs:
   web-deploy:
