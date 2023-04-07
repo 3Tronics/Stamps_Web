@@ -3,7 +3,7 @@ name: Deploy to Web Hosting via FTP
 on:
   push:
     branches:
-      - Master_disabled
+      - release
 
 jobs:
   web-deploy:
@@ -12,17 +12,6 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
-
-    - name: Parse database.php file
-      uses: edgardleal/mustache-template-action@v1.0.4
-      env:
-        MYSQL_DB_HOST: ${{ secrets.MYSQL_DB_HOST }}
-        MYSQL_DB_NAME: ${{ secrets.MYSQL_DB_NAME }}
-        MYSQL_DB_USER: ${{ secrets.MYSQL_DB_USER }}
-        MYSQL_DB_PASS: ${{ secrets.MYSQL_DB_PASS }}
-      with:
-        input: ./dev/database.php.template
-        output: ./release/database.php
 
     - name: FTP Deploy
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
