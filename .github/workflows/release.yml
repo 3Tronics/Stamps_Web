@@ -13,7 +13,6 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-
     - name: FTP Deploy
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
