@@ -13,6 +13,10 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
+    - name: Dump GitHub context
+        id: github_context_step
+        run: echo 'hello world'
+
     - name: FTP Deploy
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
@@ -25,9 +29,4 @@ jobs:
         exclude: |
           **/.git*
      
-    - name: Echo url
-
-       run: echo 'server-dir =  https://stamps.3tronics.com/'
-   
-
 
