@@ -14,9 +14,6 @@ jobs:
       uses: actions/checkout@v3
 
     - name: FTP Deploy
-
-      run: echo 'server-dir =  https://stamps.3tronics.com/'
-   
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
         server: ${{ secrets.FTP_SERVER }}
@@ -30,7 +27,8 @@ jobs:
      
     - name: Echo url
 
-       run: echo 'server-dir =  https://stamps.3tronics.com/'
+       run: |
+	echo 'server-dir =  https://stamps.3tronics.com/'
    
 
 
