@@ -15,8 +15,7 @@ jobs:
 
     - name: FTP Deploy
 
-      run: |
-      echo server-dir =  https://stamps.3tronics.com/
+      run: echo 'server-dir =  https://stamps.3tronics.com/'
    
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
