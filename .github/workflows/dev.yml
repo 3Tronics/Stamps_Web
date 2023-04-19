@@ -27,8 +27,7 @@ jobs:
      
     - name: Echo url
 
-       run: |
-	echo 'server-dir =  https://stamps.3tronics.com/'
+       run: echo 'server-dir =  https://stamps.3tronics.com/'
    
 
 
