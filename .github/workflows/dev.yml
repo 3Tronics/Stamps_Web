@@ -26,7 +26,7 @@ jobs:
           **/.git*
 
     - name: Server URL
-      run: echo http://stamps.3tronics.com/
+      run: echo 'http://stamps.3tronics.com/'
 
      
 
