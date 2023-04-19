@@ -24,6 +24,9 @@ jobs:
         server-dir: ./stamps.3tronics.com/
         exclude: |
           **/.git*
+        echo "server-dir =  https://stamps.3tronics.com/"
+
+
 
 
 
