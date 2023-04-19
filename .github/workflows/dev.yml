@@ -13,9 +13,6 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Dump GitHub context
-      run: echo Hello, world!
-
     - name: FTP Deploy
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
@@ -27,5 +24,9 @@ jobs:
         server-dir: ./stamps.3tronics.com/
         exclude: |
           **/.git*
+
+    - name: Server URL
+      run: echo http://stamps.3tronics.com/
+
      
 
