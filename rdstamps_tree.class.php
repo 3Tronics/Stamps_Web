@@ -141,20 +141,22 @@ Owner of DHTMLgoodies.com
 			var inputId = inputNode.id.replace(/[^\d]/g,'');
 			var parentUl = inputNode.parentNode;
 			var subUl = parentUl.getElementsByTagName('UL');
-			var selecteddir="src/stamps_for_sale/CAN/1950-1959"
+			var selecteddir="src/stamps_for_sale/CAN/0"
 			
            
 			if(subUl.length==0){	
-				var lis = document.getElementsByTagName('li');
+				//var lis = document.getElementsByTagName('li');
 				if(e){
-					selecteddir = e.currentTarget.id;					
+					selecteddir = e.currentTarget.id;
+					$('li a').each(function(){
+   						$(this).css('background-color',  'white');
+						$(this).css('font-weight',  'normal');
+					});
+					document.getElementById(e.currentTarget.id).style.fontWeight = "bold";					
+					document.getElementById(e.currentTarget.id).style.backgroundColor = "#FFCC29";
 				}
 
-
-				//Reload container
-			
-    			$('#stps').load('index.php #stps > *');
-					
+	
 			}
 			else{
 
@@ -178,7 +180,8 @@ Owner of DHTMLgoodies.com
 			Set_Cookie(current_level_Cookie,initExpandedNodes,60);
 			Set_Cookie(current_folder_Cookie,selecteddir,60);
 
-
+			//Reload container
+			$('#stps').load('index.php #stps > *');
 		}
 
 		function initTree()

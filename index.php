@@ -13,10 +13,11 @@
   <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
 
 
-  <link rel="stylesheet" href="/scratch-stamps/src/styles.css">
+  <!-- <link rel="stylesheet" href="/scratch-stamps/src/styles.css">
   <link rel="stylesheet" href="/scratch-stamps/src/modal.css">
   <link rel="stylesheet" href="/scratch-stamps/src/style.min_formatted.css" />
- 
+  -->
+
   <link rel="stylesheet" href="/src/styles.css">
   <link rel="stylesheet" href="/src/modal.css">
   <link rel="stylesheet" href="/src/style.min_formatted.css" />
@@ -131,12 +132,12 @@
     <?php
    
 
-    
-    
 
 $tree = new rdstamps_tree();	// Creating new tree object
-    // Adding example nodes
-
+ 
+// ********************************************************
+// *****************  EDIT the LISTS HERE  ****************
+// ********************************************************
 $tree->addToArray(1,"CANADA",0,"");
 $tree->addToArray(2,"1920-1929",1,"src/stamps_for_sale/CAN/1920-1929","frmMain","");
 $tree->addToArray(3,"1930-1939",1,"src/stamps_for_sale/CAN/1930-1939","frmMain","");
@@ -144,8 +145,8 @@ $tree->addToArray(4,"1940-1949",1,"src/stamps_for_sale/CAN/1940-1949","frmMain",
 $tree->addToArray(5,"1950-1959",1,"src/stamps_for_sale/CAN/1950-1959","frmMain","");
 $tree->addToArray(6,"1960-1969",1,"src/stamps_for_sale/CAN/1960-1969","frmMain","");
 $tree->addToArray(7,"1970-1979",1,"src/stamps_for_sale/CAN/1970-1979","frmMain","");
-$tree->addToArray(8,"1980-1989",1,"src/stamps_for_sale/CAN/1980-1989","frmMain","");
-$tree->addToArray(9,"1990-1999",1,"src/stamps_for_sale/CAN/1990-1999","frmMain","");
+//$tree->addToArray(8,"1980-1989",1,"src/stamps_for_sale/CAN/1980-1989","frmMain","");
+//$tree->addToArray(9,"1990-1999",1,"src/stamps_for_sale/CAN/1990-1999","frmMain","");
 $tree->addToArray(10,"USA",0,"");
 $tree->addToArray(11,"1920-1929",10,"src/stamps_for_sale/USA/1920-1929","frmMain","");
 $tree->addToArray(12,"1930-1939",10,"src/stamps_for_sale/USA/1930-1939","frmMain","");
@@ -153,9 +154,12 @@ $tree->addToArray(13,"1940-1949",10,"src/stamps_for_sale/USA/1940-1949","frmMain
 $tree->addToArray(14,"1950-1959",10,"src/stamps_for_sale/USA/1950-1959","frmMain","");
 $tree->addToArray(15,"1960-1969",10,"src/stamps_for_sale/USA/1960-1969","frmMain","");
 $tree->addToArray(16,"1970-1979",10,"src/stamps_for_sale/USA/1970-1979","frmMain","");
-$tree->addToArray(17,"1980-1989",10,"src/stamps_for_sale/USA/1980-1989","frmMain","");
-$tree->addToArray(18,"1990-1999",10,"src/stamps_for_sale/USA/1990-1999","frmMain","");
+//$tree->addToArray(17,"1980-1989",10,"src/stamps_for_sale/USA/1980-1989","frmMain","");
+//$tree->addToArray(18,"1990-1999",10,"src/stamps_for_sale/USA/1990-1999","frmMain","");
 
+// ********************************************************
+// ********************************************************
+// ********************************************************
 
 echo "<div class=\"tree\" id=\"evts\" >"; 
 $tree->writeJavascript();
@@ -180,22 +184,24 @@ else{
 $fileList = glob("$folder", GLOB_BRACE);
 foreach($fileList as $filename){
 //print them out onto the screen.
-
-  $str_arr = explode (".", $filename);  
+  $file = basename($filename);         
+  $str_arr = explode (".", $file);  
   if (count($str_arr)>5){
+    $item = $str_arr[0];
+    //$item2 = $str_arr[1];
     $year = $str_arr[2];
     $name=str_ireplace("_"," ",$str_arr[3]);
     $price = $str_arr[4];
     $cents = $str_arr[5];
   }
   else{
-    $year = "Error in name";
+    $item = "Error";
   }
 
   echo "<div class=\"image\">";
   $str1="<img alt=\"stamp_page_image\" src=\"".$filename."\" style=height:100px onclick=enLarge(this)>";
   echo $str1;
-  echo "<h5>$year &nbsp; &nbsp;&nbsp;$price.$cents </h5>";
+  echo "<h5>$item &nbsp; $year &nbsp; $price.$cents </h5>";
   echo "<h5>$name</h5>";
   echo "<a class=\"add-cart cart2\" href=\"#\">Add Cart</a>";
   echo "</div>"; 
@@ -236,8 +242,9 @@ echo "</div>";
   span.onclick = function () {
     modal.style.display = "none";
   };
-  
-  </script>
+
+
+</script>
  <script src="/scratch-stamps/src/main.js"></script>
  <script src="/src/main.js"></script>
  
