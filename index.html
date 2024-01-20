@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="design.css?4">
+
+    <script src="js/custom/ajaxcall.js"></script>
+    <script src="js/custom/userOperations.js?4"></script>
+    <script src="js/custom/cartOperations.js?4"></script>
+    <script src="js/custom/controller.js?4"> </script>
+
+    <title> RD Stamps </title>
+</head>
+
+<body>
+    <header>
+        <h3> RD Stamps </h3>
+        <label class="notification" id="cartlabel"> 0 </label>  
+        <img src="images/cart.png" id="cart" data-toggle="modal" data-target="#exampleModalCenter">      
+    </header> 
+
+    <main>
+         <div id="homediv">
+            <div id="mainmenu"> 
+                <div id="innerdiv">
+                    <select id="selcountry" onchange="selectCountry()"></select>
+                    <select id="selyear1" onchange="selectYear1()"></select>
+                    to
+                    <select id="selyear2" onchange="selectYear2()"></select>
+                </div>
+            </div>
+            <div id="submenu"></div>
+         </div>
+
+         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLongTitle"> Billing </h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <table class="table table-bordered">
+                          <thead>
+                              <tr>
+                                  <td> Item </td>
+                                  <td> Quantity </td>
+                                  <td> Price </td>                                 
+                              </tr>
+                          </thead>
+                          <tbody id="itemtable"></tbody>
+                      </table>
+                      <div>
+                        <p> Total Price : <span id="pricevalue"> 0 </span></p>
+                        <p> Tax : <span> 10% </span></p>
+                        <p> Cart Subtotal : <span id="totalpricevalue"> 0 </span></p>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+                      <button type="button" class="btn btn-primary" id="buy"> Buy Now </button>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+              <div class="modalzoom" id="zoomModal">
+                <span class="closezoom">&nbsp;&times;&nbsp;</span>
+                <img class="modal-content" alt="zoom_stamp" id="img01" src="">
+                <div id="caption"></div>
+              </div>
+
+    </main>
+
+    
+    <script>
+   
+      let filterCountry="";
+      let filterYear1=0;
+      let filterYear2=0;
+      let tax = 0.1;
+      let shipping = 0.99;
+      let finalbill=[];
+      start();
+
+
+
+    </script>                  
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</body>
+
+</html>

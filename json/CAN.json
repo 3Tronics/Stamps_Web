@@ -1,0 +1,83 @@
+﻿{
+	"submenu" : [{
+			 "imageurl" : "http://localhost/GroceryMart/src/stamps/CAN/1970-1979/00001.CAN.1950.King.$0.33.jpg",
+			 "idnum" : "1",
+			 "quantity" :  1 ,
+			 "country" :     "CAN",
+			 "year" :  "1950",
+			 "price" :     "$0.33",
+			 "description" :  "King",
+			 "rating" : 0 
+		},
+		{
+			 "imageurl" : "http://localhost/GroceryMart/src/stamps/CAN/1970-1979/00002.GBR.1960.Queen_Elizabeth.$0.99.jpg",
+			 "idnum" : "2",
+			 "quantity" :  1 ,
+			 "country" :     "GBR",
+			 "year" :  "1960",
+			 "price" :     "$0.99",
+			 "description" :  "Queen_Elizabeth",
+			 "rating" : 0 
+		},
+		{
+			 "imageurl" : "http://localhost/GroceryMart/src/stamps/CAN/1970-1979/00003.CAN.1966.King.$0.99.jpg",
+			 "idnum" : "3",
+			 "quantity" :  1 ,
+			 "country" :     "CAN",
+			 "year" :  "1966",
+			 "price" :     "$0.99",
+			 "description" :  "King",
+			 "rating" : 0 
+		},
+		{
+			 "imageurl" : "http://localhost/GroceryMart/src/stamps/CAN/1970-1979/00003.GBR.1960.Queen_Elizabeth.$0.99.jpg",
+			 "idnum" : "3",
+			 "quantity" :  1 ,
+			 "country" :     "GBR",
+			 "year" :  "1960",
+			 "price" :     "$0.99",
+			 "description" :  "Queen_Elizabeth",
+			 "rating" : 0 
+		},
+		{
+			 "imageurl" : "http://localhost/GroceryMart/src/stamps/CAN/1970-1979/00004.CAN.1960.King.$0.99.jpg",
+			 "idnum" : "4",
+			 "quantity" :  1 ,
+			 "country" :     "CAN",
+			 "year" :  "1960",
+			 "price" :     "$0.99",
+			 "description" :  "King",
+			 "rating" : 0 
+		},
+		{
+			 "imageurl" : "http://localhost/GroceryMart/src/stamps/CAN/1970-1979/0023.CAN.1960.King.$0.10.jpg",
+			 "idnum" : "23",
+			 "quantity" :  1 ,
+			 "country" :     "CAN",
+			 "year" :  "1960",
+			 "price" :     "$0.10",
+			 "description" :  "King",
+			 "rating" : 0 
+		},
+		{
+			 "imageurl" : "http://localhost/GroceryMart/src/stamps/CAN/1970-1979/0024.CAN.1960.King.$0.10.jpg",
+			 "idnum" : "24",
+			 "quantity" :  1 ,
+			 "country" :     "CAN",
+			 "year" :  "1960",
+			 "price" :     "$0.10",
+			 "description" :  "King",
+			 "rating" : 0 
+		},
+		{
+			 "imageurl" : "http://localhost/GroceryMart/src/stamps/CAN/1970-1979/0025.CAN.1960.King.$0.99.jpg",
+			 "idnum" : "25",
+			 "quantity" :  1 ,
+			 "country" :     "CAN",
+			 "year" :  "1960",
+			 "price" :     "$0.99",
+			 "description" :  "King",
+			 "rating" : 0 
+		}
+	]
+}

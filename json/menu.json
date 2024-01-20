@@ -1,0 +1,24 @@
+{
+	"mainmenu" : [
+		{
+			"key" : "Canada",
+			"subkey" : "CAN"
+		},
+		{
+			"key" : "Australia",
+			"subkey" : "AUS"
+		},
+        {
+			"key" : "Britain",
+			"subkey" : "GBR"
+		},
+        {
+			"key" : "New Zealand",
+			"subkey" : "NZD"
+		},
+		{
+			"key" : "USA",
+			"subkey" : "USA"
+		}
+	]
+}

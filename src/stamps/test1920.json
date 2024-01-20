@@ -1,0 +1,20 @@
+{
+    "submenu": [{    
+            "idnum": 2,
+            "quantity": 1,
+            "country": "CAN",
+            "year": 1945,
+            "price": 33.13,
+            "imageurl": "G:/BACKUPS/GIT_REPOS/proj/Stamps_Web/src/stamps_for_sale/CAN/1920-1929/000002.CAN.1945.KingGeorge.$33.13.jpg",   
+        },
+        {
+            "idnum": 4,
+            "quantity": 1,
+            "country": "CAN",
+            "year": 1945,
+            "price": 0.99,
+            "imageurl": "G:/BACKUPS/GIT_REPOS/proj/Stamps_Web/src/stamps_for_sale/CAN/1920-1929/000004.CAN.1945.KingGeorge.$0.99.jpg"   
+        }
+
+    ]
+}
